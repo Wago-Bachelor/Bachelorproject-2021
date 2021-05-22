@@ -102,7 +102,7 @@ function toggleById(id) {
 
 //Depth graph
 function getData() {
-  var value = Math.ceil(Math.random() * 100);
+  var value = Math.floor(Math.random() * (75-60+1))+60;
   document.getElementById("actual-depth").innerHTML = value;
   return value - 100;
 }
@@ -176,58 +176,7 @@ function getColor(color) {
   return getComputedStyle(document.documentElement).getPropertyValue(color);
 }
 
-function getFormvalue() {
-  var x = document.getElementById("form1");
-  for (var i = 0; i < x.length; i++) {
-    if (x.elements[i].value != "Submit") {
-      console.log(x.elements[i].value);
-    }
-  }
-}
 
-function appendList(name) {
-  let listElement = document.getElementById("alarmList");
-  let listItem = document.createElement("li");
-  listItem.innerText = name;
-  listElement.appendChild(listItem);
-  var myNodelist = document.getElementsByTagName("LI");
-  var i;
-
-  for (i = 0; i < myNodelist.length; i++) {
-    var span = document.createElement("SPAN");
-    var txt = document.createTextNode("Ack");
-    span.className = "close";
-    span.appendChild(txt);
-    myNodelist[i].appendChild(span);
-  }
-  var close = document.getElementsByClassName("close");
-  var a;
-  for (a = 0; a < close.length; a++) {
-    close[a].onclick = function () {
-      var div = this.parentElement;
-      div.parentNode.removeChild(div);
-      document.getElementById(
-        "alarm-number"
-      ).innerText = document
-        .getElementById("alarmList")
-        .getElementsByTagName("li").length;
-      if (
-        document.getElementById("alarmList").getElementsByTagName("li")
-          .length == 0
-      ) {
-        document.getElementById("alert").style.color = null;
-      }
-    };
-  }
-  document.getElementById("alarm-number").innerText = document
-    .getElementById("alarmList")
-    .getElementsByTagName("li").length;
-  if (
-    document.getElementById("alarmList").getElementsByTagName("li").length > 0
-  ) {
-    document.getElementById("alert").style.color = "red";
-  }
-}
 
 // SWITCH CONE ON/OFF
 function coneDisplay(myDIV) {
