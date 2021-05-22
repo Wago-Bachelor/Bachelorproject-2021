@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" theme="dusk">
+
+<!-- Head-element: -->
+<head>
+  <title>Bachelor</title>
+   <!-- Open-Bridge Components -->
+  <link rel="stylesheet" type="text/css" href="modules\openbridge-css\dist\css\openbridge.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" type="text/css" href="styles/css/styles.css">
+
+  <!-- Web-Components -->
+  <script src="modules/openbridge-web-components/dist/main.mjs"></script>
+
+</head>
+
+<!-- Body-element -->
+<body onload="initialFunction()" class="ob-global-surface">
+
+  <!-- Top navigation bar -->
+  <div class="ob-nav-top-bar">
+    <div class="ob-menu-container">
+      <!-- Burger menu button -->
+      <a id="menubtn" class="ob-nav-item ob-nav-btn ob-icon theme-color" onclick="menu_btn_pressed()">
+        <span class="material-icons">menu</span>
+      </a>
+      <!-- Divider & title -->
+      <div class="ob-divider theme-color"></div>
+      <div class="ob-title theme-color">
+        <span >Wago</span>
+        <span>Norway</span>
+      </div>
+      <!-- Subtitle -->
+      <div id="sectionName" class="ob-sub-title theme-color-bright"></div>
+    </div>
+
+    <!--Navigation menu with buttons & logo-->
+    <div id="side-nav-menu" class="ob-nav-menu theme-color">
+      <a id="Home" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">home</span>
+        <div class="ob-label">Home</div>
+      </a>
+      <a id="Engine" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">microwave</span>
+        <div class="ob-label">Engine</div>
+      </a>
+      <a id="Tanks" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">shutter_speed</span>
+        <div class="ob-label">Tanks & Pumps</div>
+      </a>
+      <a id="Lights" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">flare</span>
+        <div class="ob-label">Lights</div>
+      </a>
+      <a id="Settings" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">settings</span>
+        <div class="ob-label">Settings</div>
+      </a>
+      <a id="Support" class="burger-menu ob-nav-item" onclick="openTabs(this.id)">
+        <span class="material-icons">help</span>
+        <div class="ob-label">Help & Support</div>
+      </a>
+      <img id="logo" src="/img/wago-1.svg" alt="">
+    </div>
+
+    <!-- Top navigation right buttons -->
+    <div id="buttons-upper-right" class="ob-menu-container top-bar-right-box">
+      <!-- Alert Button -->
+      <a id="alert" class="ob-nav-item ob-nav-btn theme-color" onclick="toggleById(this.id)"><span
+          class="material-icons">notifications</span></a>
+          <div class="alert-number" id="alarm-number"></div>
+      <!-- Vertical Button Divider -->
+      <div class="ob-divider theme-color"></div>  
+      <!-- Account Button -->
+      <a id="account" class="ob-nav-item ob-nav-btn theme-color" onclick="toggleById(this.id)"><span
+          class="material-icons">account_circle</span></a>
+      <!-- Theme Color Button -->
+      <a id="theme" class="ob-nav-item ob-nav-btn ob-icon theme-color" onclick="toggleById(this.id)"><span
+          class="material-icons">brightness_4</span></a>
+      <!-- Application Button -->
+      <a id="application" class="ob-nav-item ob-nav-btn theme-color" onclick="toggleById(this.id)"><span
+          class="material-icons">apps</span></a>
+    </div>
+
+    <!-- Alert Menu - Start -->
+    <div id="alertTab" class="ob-nav-menu theme-color">
+
+      <div class="alert-top-bar theme-color ob-nav-top-bar"><div class="alert-top-bar-text">Active Alerts</div></div>
+
+      <ul class="theme-color myUL" id="alarmList">
+        <li>Tank_Control.Level_Tank1_View.VALLim</li>
+        <li>Engine_Control.AzimuthPort_Effect_Mon.VAHAct</li>
+      </ul>
+
+    </div>
+    <!-- Alert Menu - Slutt -->
+
+
+
+
+    <!-- Account Menu - Start -->
+    <div id="accountTab" class="ob-nav-menu theme-color">
+        <div class="account-text">Account</div>
+
+        <div id="login-info" class="input">
+          <br> <br>
+          <input type="text" name="User" placeholder="Username"> 
+          <br> <br>
+          <input type="text" name="pass" placeholder="Password">
+        </div>
+
+        <div class="signin-btn-frame">
+          <div class="signin-btn-text">Sign in</div>
+        </div>
+    </div>
+    <!-- Account Menu - Slutt -->
+
+
+
+
+
+    <!-- Theme-Color Menu - Start -->
+    <div id="themeTab" class="ob-nav-menu theme-color">
+      <div class="theme-text">Change theme</div>
+      
+      <div class="change-theme-box theme-color" id="changeTheme">
+
+        <div class="theme-button theme-color" id="night" onclick="toggleTheme(this.id)"><span
+          class="theme-icon material-icons">nightlight_round</span></div>
+
+          <div class="theme-button theme-color" id="dusk" onclick="toggleTheme(this.id)"><span
+          class="theme-icon material-icons">wb_twilight</span></div>
+
+        <div class="theme-button theme-color" id="day" onclick="toggleTheme(this.id)"><span
+          class="theme-icon material-icons">cloud</span></div>
+
+        <div class="theme-button theme-color" id="bright" onclick="toggleTheme(this.id)"><span
+          class="theme-icon material-icons">wb_sunny</span></div>
+      </div>
+    </div>
+    <!-- Theme-Color Menu - Slutt -->
+
+    <!-- Application Menu - Start -->
+    <div id="applicationTab" class="ob-nav-menu theme-color">
+      <div class="app-search-bar">
+          <span class="search-icon material-icons">search</span>
+          <input type="text" placeholder="Search">
+      </div>
+      <br><br><br><br><br>
+      <div class="apps" style="left: 50px; top: 90px;">
+        <span class="apps-icon material-icons">map</span>
+      </div>
+      <div class="apps" style="left: 150px; top: 90px;">
+        <span class="apps-icon material-icons">mic</span>
+      </div>
+      <div class="apps" style="left: 250px; top: 90px;">
+        <span class="apps-icon material-icons">science</span>
+      </div>
+      <div class="apps" style="left: 350px; top: 90px;">
+        <span class="apps-icon material-icons">memory</span>
+      </div>
+
+      <div class="apps" style="left: 50px; top: 200px;">
+        <span class="apps-icon material-icons">camera</span>
+      </div>
+      <div class="apps" style="left: 150px; top: 200px;">
+        <span class="apps-icon material-icons">sd_card</span>
+      </div>
+      <div class="apps" style="left: 250px; top: 200px;">
+        <span class="apps-icon material-icons">backup</span>
+      </div>
+      <div class="apps" style="left: 350px; top: 200px;">
+        <span class="apps-icon material-icons">network_check</span>
+      </div>
+
+      <div class="apps" style="left: 50px; top: 310px;">
+        <span class="apps-icon material-icons">directions_boat</span>
+      </div>
+      <div class="apps" style="left: 150px; top: 310px;">
+        <span class="apps-icon material-icons">radar</span>
+      </div>
+      <div class="apps" style="left: 250px; top: 310px;">
+        <span class="apps-icon material-icons">explore</span>
+      </div>
+      <div class="apps" style="left: 350px; top: 310px;">
+        <span class="apps-icon material-icons">electrical_services</span>
+      </div>
+
+    </div>
+    <!-- Application Menu - Slutt -->
+
+  </div>
+
+  <div id="HomeTab" class="tabs">
+    <!-- Compass - Start-->
+    <div class="ob-nav-menu compass-box">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Compass</div>
+      <div class="text-border theme-color"></div>
+
+      <!-- Compass Visualization -->
+      <div class="container">
+        <div id="ship-test" class="hdg-ship">
+          <div class="hdg-ship-circle"></div>
+          <div class="hdg-ship-square"></div>
+        </div>
+        <div id="windmarker-javascript" class="wind-marker">
+          <div class="wind-marker-icon instrument-color"><span class="material-icons">air</span></div>
+        </div>
+        <div id="currentmarker-javascript" class="current-marker">
+          <div class="current-marker-icon instrument-color"><span class="material-icons">call_missed</span></div>
+        </div>
+        <!-- Spinning Wheel Component -->
+        <div class="align">
+          <ob-rot-circle-large rateOfTurn="0" style=" height: 250px; width: 250px;" />
+        </div>
+        <!-- Compass Component -->
+        <div class="align">
+          <ob-hdg-large id="test123" courseOverGround="211" heading="70" northUp="" style="height: 612px; width: 612px;" />
+        </div>
+      </div>
+
+      <!-- Heading Text & Values -->
+      <div class="headingvalue">
+
+        <div class="tekst theme-color">HDG</div>
+
+        <div class="value instrument-color"><span id="PLC_PRG.hei">77</span><span>&#176;</span></div>
+      </div>
+
+      <!-- Set Heading -->
+      <div class="setheadingvalue">
+
+        <div class="tekst theme-color">SET COURSE</div>
+
+        <div class="value instrument-color"><span id="Control_System_Analog.iDestination"></span><span>&#176;</span></div>
+      </div>
+
+      <!-- Course Text & Values -->
+      <div class="coursevalue">
+
+        <div class="tekst theme-color">COG</div>
+
+        <div class="value instrument-color"><span id="Control_System_Analog.iActualDir">056</span><span>&#176;</span></div>
+      </div>
+      <!-- Set Course Button Box -->
+      <div class="set-course-button-box">
+        <div class="set-course-tekst theme-color">Adjust Course</div>
+        <div class="set-course-main">
+          <div class = "course-input">
+            <form id="form1" onsubmit="return false">
+              <input type="number" name="course" placeholder="" onclick="this.select();" max="360">
+            </form>
+          </div>
+        </div>
+        <div class="confirm-button ob-button">
+          <div class="confirm-button-text theme-color-bright" onclick="getFormvalue()">Confirm</div>
+        </div>
+      </div>
+
+      <!-- Wind -->
+      <div class="wind-box">
+        <div class="wind-text theme-color">Wind</div>
+        <div class="value-box">
+          <div class="value-number instrument-color">8.5</div>
+          <div class="value-text instrument-color">m/s</div>
+        </div>
+      </div>
+
+      <!-- Current -->
+      <div class="current-box">
+        <div class="current-text theme-color">Current</div>
+        <div class="value-box">
+          <div class="value-number instrument-color">6.3</div>
+          <div class="value-text instrument-color">m/s</div>
+        </div>
+      </div>
+
+      <!-- Autopilot -->
+      <div class="autopilot-box">
+        <div class="autopilot-tekst theme-color">Autopilot</div>
+        <div class="autopilot-btn" onclick="this.classList.toggle('active')">
+          <div class="inner-circle"></div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Compass - End -->
+
+
+
+    <!-- Speed - Start -->
+    <div class="ob-nav-menu speed-box">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Speed</div>
+      <div class="text-border theme-color"></div>
+
+      <nav class="speed-water-box">
+        <nav class="speed-text theme-color">STW</nav>
+        <nav class="value-box">
+          <nav class="value-number instrument-color">8.5</nav>
+          <nav class="value-text instrument-color">kn</nav>
+        </nav>
+
+        <nav class="speed-water-instrument">
+          <ob-speedometer-medium style="height: 88x; width: 88px;" value="8" />
+        </nav>
+      </nav>
+
+      <nav class="speed-ground-box">
+        <nav class="speed-text theme-color">SOG</nav>
+        <nav class="value-box">
+          <nav class="value-number instrument-color">8.5</nav>
+          <nav class="value-text instrument-color">kn</nav>
+        </nav>
+        <nav class="speed-water-instrument">
+          <ob-speedometer-medium style="height: 88x; width: 88px;" value="8" />
+        </nav>
+      </nav>
+
+
+    </div>
+    <!-- Speed - End -->
+
+
+    <!-- Depth - Start -->
+    <div class="ob-nav-menu depth-box">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Depth</div>
+      <div class="text-border theme-color"></div>
+
+      <!-- Depth content -->
+      <div class="depthGraph">
+        <div id="depth-value" class="value-box">
+          <span id="actual-depth" class="value-number instrument-color">75</span>
+          <span class="value-text instrument-color">m</span>
+        </div>
+        <div id="depth-text" class="speed-text theme-color">Below surface</div>
+
+        <div class="range theme-color-bright">
+          <span class="value">0</span>
+          <span class="value">100</span>
+        </div>
+        <div id="chart"></div>
+      </div>
+    </div>
+    <!-- Depth - End -->
+
+    <!-- Pitch and Roll - Start -->
+    <div class="ob-nav-menu pitch-roll-box">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Pitch & Roll</div>
+      <div class="text-border theme-color"></div>
+      
+      <div class="pitch-roll">
+        <ob-pitch-roll-medium lowerPitch="-2" lowerRoll="-2" pitch="0" roll="0" scale="5"
+        style=" height: 270px; width: 270px;" upperPitch="3" upperRoll="3" />
+      </div>
+
+
+    </div>
+    <!-- Pitch and Roll - End -->
+
+    <!-- Thruster - Start -->
+<div class="ob-nav-menu thruster-box">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Thrusters</div>
+      <div class="text-border theme-color"></div>
+
+      <div class="shipFrame">
+        <div class="bow"></div>
+        <div class="ship"></div>
+      </div>
+      <div id="bow-thruster1">
+        <div class="element-title theme-color">bow thruster 1</div>
+        <div class="power-visu">
+          <ob-tunnel-thruster-medium showSetPoint="" target="60" value="52"/>
+        </div>
+        <div class="power-display">
+          <div class="power-title theme-color">Power</div>
+          <div class="power-value instrument-color">52</div> <div class="percent">%</div>
+        </div>
+      </div>
+
+      <div id="bow-thruster2">
+        <div class="element-title theme-color">bow thruster 2</div>
+        <div class="power-visu">
+          <ob-tunnel-thruster-medium showSetPoint="" target="60" value="60"/>
+        </div>
+        <div class="power-display">
+          <div class="power-title theme-color">Power</div>
+          <div class="power-value instrument-color">60</div> <div class="percent">%</div>
+        </div>
+      </div>
+      <div id="azimuth-port-left">
+        <div class="element-title theme-color">Azimuth Port</div>
+        <ob-azimuth-medium angle="45" showSetPointAngle="" showSetPointValue="" style=" height: 256px; width: 256px;" target="60" targetAngle="20" value="40"/>
+      </div>
+      <div class="azimuth-status-left">
+        <div class="azimuth-status theme-color">
+          <div class="title">Power</div>
+          <div class="value instrument-color">52</div> <div class="percent">%</div>
+        </div>
+        <div class="azimuth-status theme-color">
+          <div class="title">Angle</div>
+          <div class="value instrument-color">52&#730;</div>
+        </div>
+        <div class="azimuth-status theme-color">
+          <div class="title">Fuel</div>
+          <div class="value instrument-color">30</div> <div class="percent">%</div>
+        </div>
+      </div>
+
+      <div id="azimuth-port-right" class="azimuth-port">
+        <div class="element-title theme-color">Azimuth Starboard</div>
+        <ob-azimuth-medium angle="60" showSetPointAngle="" showSetPointValue="" style=" height: 256px; width: 256px;" target="60" targetAngle="20" value="10" />
+      </div>
+      <div class="azimuth-status-right">
+        <div class="azimuth-status theme-color">
+          <div class="title">Power</div>
+          <div class="value instrument-color">52</div> <div class="percent">%</div>
+        </div>
+        <div class="azimuth-status theme-color">
+          <div class="title">Angle</div>
+          <div class="value instrument-color">52&#730;</div>
+        </div>
+        <div class="azimuth-status theme-color">
+          <div class="title">Fuel</div>
+          <div class="value instrument-color">30</div> <div class="percent">%</div>
+        </div>
+      </div>
+      
+      <div id="aft-thruster">
+        <div class="element-title theme-color">aft thruster</div>
+        <div class="power-visu">
+          <ob-tunnel-thruster-medium showSetPoint="" target="60" value="52"/>
+        </div>
+        <div class="power-display">
+          <div class="power-title theme-color">Power</div>
+          <div class="power-value instrument-color">52</div> <div class="percent">%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Thruster - End -->
+  </div>
+  <div id="EngineTab" class="tabs">
+    <!-- Azimuth Card -->
+    <div class="engine-cards">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Azimuth</div>
+      <div class="theme-color text-border"></div>
+      <div class="element-title theme-color" style="position:absolute;left:22%;top:10%;width: 200px;">Azimuth Port</div>
+      <div class="engine-azimuth">
+        <ob-azimuth-medium angle="60" showSetPointAngle="" showSetPointValue="" style=" height: 256px; width: 350px;" target="60" targetAngle="20" value="10" />
+      </div>
+      <div class="tank-tekst theme-color" style="top:60%;left:50%">Power:</div>
+      <div class="tank-tekst instrument-color" style="top:60%;left:70%">999<span>%</span></div>
+      <div class="tank-tekst theme-color" style="top:65%;left:50%">Angle:</div>
+      <div class="tank-tekst instrument-color" style="top:65%;left:70%">30˚</div>
+      <div class="tank-tekst theme-color" style="top:70%;left:50%">Temperature:</div>
+      <div class="tank-tekst instrument-color" style="top:70%;left:70%">50˚C</div>
+      <div class="tank-tekst theme-color" style="top:75%;left:50%;width: 200px;">Oil Pressure:</div>
+      <div class="tank-tekst instrument-color" style="top:75%;left:70%">666<span>psi</span></div>
+
+      <div class="element-title theme-color" style="position:absolute;left:62%;top:10%;width: 200px;">Azimuth Starboard</div>
+      <div class="engine-azimuth" style="left:50%">
+        <ob-azimuth-medium angle="60" showSetPointAngle="" showSetPointValue="" style=" height: 256px; width: 350px;" target="60" targetAngle="20" value="10" />
+      </div>
+      <div class="tank-tekst theme-color" style="top:60%;left:10%">Power:</div>
+      <div class="tank-tekst instrument-color" style="top:60%;left:30%">50%</div>
+      <div class="tank-tekst theme-color" style="top:65%;left:10%">Angle:</div>
+      <div class="tank-tekst instrument-color" style="top:65%;left:30%">30˚</div>
+      <div class="tank-tekst theme-color" style="top:70%;left:10%">Temperature:</div>
+      <div class="tank-tekst instrument-color" style="top:70%;left:30%">50˚C</div>
+      <div class="tank-tekst theme-color" style="top:75%;left:10%;width: 200px;">Oil Pressure:</div>
+      <div class="tank-tekst instrument-color" style="top:75%;left:30%;">50psi</div>
+    
+    </div>
+
+    <!-- FUEL CARD -->
+    <div class="engine-cards" style="left:1200px;width:700px;height: 1000px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Fuel</div>
+      <div class="theme-color text-border"></div>
+      <div class="element-title theme-color" style="position:absolute;left:21%;top:7%">Tank 1</div>
+      <div class=tanks-outline style="height:400px;left:auto;right:50px;top:10%;">
+        <div style="position:absolute;left:30%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 115px;" value="25"/></div>
+      </div>
+      <div class="element-title theme-color" style="position:absolute;left:73%;top:7%">Tank 2</div>
+        <div class=tanks-outline style="height:400px;left: 50px;top:10%;">
+          <div style="position:absolute;left:30%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 115px;" value="25"/></div>
+        </div>
+
+
+      <div class="engine-text-box" >
+        <div class="tank-tekst theme-color">Level: </div>
+        <div class="tank-tekst theme-color" style="top:50%">Temp: </div>
+        <div class="tank-tekst instrument-color" style="left:40%;">50%</div>
+        <div class="tank-tekst instrument-color" style="left:40%;top:50%">30˚C</div>
+      </div>
+      <div class="engine-text-box" style="left:55%" >
+        <div class="tank-tekst theme-color">Level: </div>
+        <div class="tank-tekst theme-color" style="top:50%">Temp: </div>
+        <div class="tank-tekst instrument-color" style="left:40%;">50%</div>
+        <div class="tank-tekst instrument-color" style="left:40%;top:50%">30˚C</div>
+      </div>
+      <div class="element-title theme-color" style="position:absolute;left:17%;top:67%">Reserve Tank 1</div>
+      <div class=tanks-outline style="height:100px;width:300px;left:auto;right:30px;top:70%;border-radius: 10%;">
+        <div style="position:absolute;"><ob-bar-horizontal-positive-large range="100" style="height: 512px;width: 300px;" value="25"/></div>
+      </div>
+      <div class="element-title theme-color" style="position:absolute;left:65%;top:67%">Reserve Tank 2</div>
+      <div class=tanks-outline style="height:100px;width:300px;left:30px;top:70%;border-radius: 10%;">
+        <div style="position:absolute;"><ob-bar-horizontal-positive-large range="100" style="height: 512px;width: 300px;" value="25"/></div>
+      </div>
+      <div class="engine-text-box" style="top:82%" >
+        <div class="tank-tekst theme-color">Level: </div>
+        <div class="tank-tekst theme-color" style="top:50%">Temp: </div>
+        <div class="tank-tekst instrument-color" style="left:40%;">50%</div>
+        <div class="tank-tekst instrument-color" style="left:40%;top:50%">30˚C</div>
+      </div>
+      <div class="engine-text-box" style="left:55%;top:82%" >
+        <div class="tank-tekst theme-color">Level: </div>
+        <div class="tank-tekst theme-color" style="top:50%">Temp: </div>
+        <div class="tank-tekst instrument-color" style="left:40%;">50%</div>
+        <div class="tank-tekst instrument-color" style="left:40%;top:50%">30˚C</div>
+      </div>
+    </div>
+    <!-- Thruster 1 CARD -->
+    <div class="engine-cards" style="width:390px;height: 290px;top:720px">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Bow Thruster 1</div>
+      <div class="theme-color text-border"></div>
+      <div class="engine-thrusters">
+        <ob-tunnel-thruster-medium showSetPoint="" target="0" value="60"/>
+      </div>
+      <div class="tank-tekst theme-color" style="top:45%;width: 200px;">Power Left:</div>
+      <div class="tank-tekst instrument-color" style="top:45%;left:60%">50%</div>
+      <div class="tank-tekst theme-color" style="top:60%;width: 200px;">Power Right:</div>
+      <div class="tank-tekst instrument-color" style="top:60%;left:60%">0%</div>
+      <div class="tank-tekst theme-color" style="top:75%">Temperature:</div>
+      <div class="tank-tekst instrument-color" style="top:75%;left:60%">50˚C</div>
+    </div>
+
+
+    <!-- Thruster 2 Card -->
+    <div class="engine-cards" style="width:390px;height: 290px;top:720px;left:410px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Bow Thruster 2</div>
+      <div class="theme-color text-border"></div>
+      <div class="engine-thrusters">
+        <ob-tunnel-thruster-medium showSetPoint="" target="0" value="60"/>
+      </div>
+      <div class="tank-tekst theme-color" style="top:45%;width: 200px;">Power Left:</div>
+      <div class="tank-tekst instrument-color" style="top:45%;left:60%">50%</div>
+      <div class="tank-tekst theme-color" style="top:60%;width: 200px;">Power Right:</div>
+      <div class="tank-tekst instrument-color" style="top:60%;left:60%">0%</div>
+      <div class="tank-tekst theme-color" style="top:75%">Temperature:</div>
+      <div class="tank-tekst instrument-color" style="top:75%;left:60%">53˚C</div>
+    </div>
+    <!-- Thruster aft Card -->
+    <div class="engine-cards" style="width:380px;height: 290px;top:720px;left:810px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Thruster aft</div>
+      <div class="theme-color text-border"></div>
+      <div class="engine-thrusters">
+        <ob-tunnel-thruster-medium showSetPoint="" target="0" value="60"/>
+      </div>
+      <div class="tank-tekst theme-color" style="top:45%;width: 200px;">Power Left:</div>
+      <div class="tank-tekst instrument-color" style="top:45%;left:60%">50%</div>
+      <div class="tank-tekst theme-color" style="top:60%;width: 200px;">Power Right:</div>
+      <div class="tank-tekst instrument-color" style="top:60%;left:60%">0%</div>
+      <div class="tank-tekst theme-color" style="top:75%">Temperature:</div>
+      <div class="tank-tekst instrument-color" style="top:75%;left:60%">30˚C</div>
+    </div>
+
+
+
+  </div>
+
+
+  <div id="TanksTab" class="tabs">
+    <div class="ob-nav-menu tank-card" style="left: 0px;" id="testphitte">
+      <div class="ob-label theme-color-bright" style="padding: 8px;">Tank 1</div>
+      <div class="theme-color text-border"></div>
+      <div class=tanks-outline>
+        <div style="position:absolute;left:25%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 144px;" value="25"/></div>
+      </div>
+      <div class="tank-inner-circle"></div>
+      <div class="tank-inner-circle" style="right:120px"></div>
+      <div class="tank-inner-circle" style="right:90px"></div>
+      <div class="tank-inner-circle" style="right:60px"></div>
+      <div class=heatbox></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:20px;">Set Temp:</div>
+      <!-- Set temp Button Box -->
+      <div class="set-course-button-box" style="top:40px; width: 175px; height: 230px; border-bottom: none;">
+        <div class="set-course-main">
+          <div class = "course-input" style="left: 15px;">
+            <form id="form1" onsubmit="return false">
+              <input type="number" name="course" placeholder="Type Value" onclick="this.select();" max="40">
+            </form>
+          </div>
+        </div>
+        <div class="confirm-button ob-button" style="left: 0px; top: 100px;">
+          <div class="confirm-button-text theme-color-bright" onclick="getFormvalue()">Confirm</div>
+        </div>
+      </div>
+      <div class="tank-tekst theme-color" style="top:200px;left:20px;">Temp:</div>
+      <div class="value-box" style="top: 260px;left: 40px;"> <div class="value-number instrument-color">52&#730;</div></div>
+      <div class="tank-tekst theme-color" style="top:350px;left:20px;">Level:</div>
+      <div class="value-box" style="top: 410px;left: 40px;"> <div class="value-number instrument-color">52&#37;</div></div>
+      <div class="tank-tekst theme-color" style="top:500px;left:20px;">Heater:</div>
+      <div class="value-box" style="top: 560px;left: 40px;"> <div class="value-number instrument-color">ON</div></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left: 475px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Tank 2</div>
+      <div class="theme-color text-border"></div>
+      <div class=tanks-outline>
+        <div style="position:absolute;left:25%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 144px;" value="37"/></div>
+      </div>
+      <div class="tank-inner-circle"></div>
+      <div class="tank-inner-circle" style="right:120px"></div>
+      <div class="tank-inner-circle" style="right:90px"></div>
+      <div class="tank-inner-circle" style="right:60px"></div>
+      <div class=heatbox></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:20px;">Set Temp:</div>
+      <div class="set-course-button-box" style="top:40px; width: 175px; height: 230px; border-bottom: none;">
+        <div class="set-course-main">
+          <div class = "course-input" style="left: 15px;">
+            <form id="form1" onsubmit="return false">
+              <input type="number" name="course" placeholder="Type Value" onclick="this.select();" max="40">
+            </form>
+          </div>
+        </div>
+        <div class="confirm-button ob-button" style="left: 0px; top: 100px;">
+          <div class="confirm-button-text theme-color-bright" onclick="getFormvalue()">Confirm</div>
+        </div>
+      </div>
+      <div class="tank-tekst theme-color" style="top:200px;left:20px;">Temp:</div>
+      <div class="value-box" style="top: 260px;left: 40px;"> <div class="value-number instrument-color">52&#730;</div></div>
+      <div class="tank-tekst theme-color" style="top:350px;left:20px;">Level:</div>
+      <div class="value-box" style="top: 410px;left: 40px;"> <div class="value-number instrument-color">52&#37;</div></div>
+      <div class="tank-tekst theme-color" style="top:500px;left:20px;">Heater:</div>
+      <div class="value-box" style="top: 560px;left: 40px;"> <div class="value-number instrument-color">ON</div></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left:951px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Tank 3</div>
+      <div class="theme-color text-border"></div>
+      <div class=tanks-outline>
+        <div style="position:absolute;left:25%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 144px;" value="80"/></div>
+      </div>
+      <div class="tank-inner-circle"></div>
+      <div class="tank-inner-circle" style="right:120px"></div>
+      <div class="tank-inner-circle" style="right:90px"></div>
+      <div class="tank-inner-circle" style="right:60px"></div>
+      <div class=heatbox></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:20px;">Set Temp:</div>
+      <div class="set-course-button-box" style="top:40px; width: 175px; height: 230px; border-bottom: none;">
+        <div class="set-course-main">
+          <div class = "course-input" style="left: 15px;">
+            <form id="form1" onsubmit="return false">
+              <input type="number" name="course" placeholder="Type Value" onclick="this.select();" max="40">
+            </form>
+          </div>
+        </div>
+        <div class="confirm-button ob-button" style="left: 0px; top: 100px;">
+          <div class="confirm-button-text theme-color-bright" onclick="getFormvalue()">Confirm</div>
+        </div>
+      </div>
+      <div class="tank-tekst theme-color" style="top:200px;left:20px;">Temp:</div>
+      <div class="value-box" style="top: 260px;left: 40px;"> <div class="value-number instrument-color">562&#730;</div></div>
+      <div class="tank-tekst theme-color" style="top:350px;left:20px;">Level:</div>
+      <div class="value-box" style="top: 410px;left: 40px;"> <div class="value-number instrument-color">562&#37;</div></div>
+      <div class="tank-tekst theme-color" style="top:500px;left:20px;">Heater:</div>
+      <div class="value-box" style="top: 560px;left: 40px;"> <div class="value-number instrument-color">ON</div></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left: 1428px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Tank 4</div>
+      <div class="theme-color text-border"></div>
+      <div class=tanks-outline>
+        <div style="position:absolute;left:25%;"><ob-bar-vertical-positive-large range="100" style="height: 512px;width: 144px;" value="50"/></div>
+      </div>
+      <div class="tank-inner-circle"></div>
+      <div class="tank-inner-circle" style="right:120px"></div>
+      <div class="tank-inner-circle" style="right:90px"></div>
+      <div class="tank-inner-circle" style="right:60px"></div>
+      <div class=heatbox></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:20px;">Set Temp:</div>
+      <div class="set-course-button-box" style="top:40px; width: 175px; height: 230px; border-bottom: none;">
+        <div class="set-course-main">
+          <div class = "course-input" style="left: 15px;">
+            <form id="form1" onsubmit="return false">
+              <input type="number" name="course" placeholder="Type Value" onclick="this.select();" max="40">
+            </form>
+          </div>
+        </div>
+        <div class="confirm-button ob-button" style="left: 0px; top: 100px;">
+          <div class="confirm-button-text theme-color-bright" onclick="getFormvalue()">Confirm</div>
+        </div>
+      </div>
+      <div class="tank-tekst theme-color" style="top:200px;left:20px;">Temp:</div>
+      <div class="value-box" style="top: 260px;left: 40px;"> <div class="value-number instrument-color">521&#730;</div></div>
+      <div class="tank-tekst theme-color" style="top:350px;left:20px;">Level:</div>
+      <div class="value-box" style="top: 410px;left: 40px;"> <div class="value-number instrument-color">562&#37;</div></div>
+      <div class="tank-tekst theme-color" style="top:500px;left:20px;">Heater:</div>
+      <div class="value-box" style="top: 560px;left: 40px;"> <div class="value-number instrument-color">ON</div></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left: 0px; top:700px; height: 310px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Pump 1</div>
+      <div class="theme-color text-border"></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:40px;">Power:</div>
+      <div class="value-box" style="top: 100px;left: 60px;"> <div class="value-number instrument-color">6969<span>%</span></div></div>
+      <div class="tank-tekst theme-color" style="top:180px;left:40px;">ON/OFF:</div>
+      <div class="value-box" style="top: 230px;left: 60px;"> <div class="value-number instrument-color">ON</div></div>
+      <div class="pump-img"></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left:475px; top:700px; height: 310px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Pump 2</div>
+      <div class="theme-color text-border"></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:40px;">Power:</div>
+      <div class="value-box" style="top: 100px;left: 60px;"> <div class="value-number instrument-color">6969<span>%</span></div></div>
+      <div class="tank-tekst theme-color" style="top:180px;left:40px;">ON/OFF:</div>
+      <div class="value-box" style="top: 230px;left: 60px;"> <div class="value-number instrument-color">ON</div></div>
+      <div class="pump-img"></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left:951px; top:700px; height: 310px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Pump 3</div>
+      <div class="theme-color text-border"></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:40px;">Power:</div>
+      <div class="value-box" style="top: 100px;left: 60px;"> <div class="value-number instrument-color">6969<span>%</span></div></div>
+      <div class="tank-tekst theme-color" style="top:180px;left:40px;">ON/OFF:</div>
+      <div class="value-box" style="top: 230px;left: 60px;"> <div class="value-number instrument-color">ON</div></div>
+      <div class="pump-img"></div>
+    </div>
+    <div class="ob-nav-menu tank-card" style="left: 1428px; top:700px; height: 310px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Pump 4</div>
+      <div class="theme-color text-border"></div>
+      <div class="tank-tekst theme-color" style="top:50px;left:40px;">Power:</div>
+      <div class="value-box" style="top: 100px;left: 60px;"> <div class="value-number instrument-color">6969<span>%</span></div></div>
+      <div class="tank-tekst theme-color" style="top:180px;left:40px;">ON/OFF:</div>
+      <div class="value-box" style="top: 230px;left: 60px;"> <div class="value-number instrument-color">ON</div></div>
+      <div class="pump-img"></div>
+    </div>
+  </div>
+
+  <div id="LightsTab" class="tabs">
+    <div class="light-card">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">SEARCH LIGHTS</div>
+      <div class="theme-color text-border"></div>
+    
+      <div class="ship-light-position" >
+        
+        <div id="ship-light" class="hdg-ship align" style="width:128px;height:320px">
+          <div class="hdg-ship-circle" style ="width: 128px;height:128px;"></div>
+          <div class="hdg-ship-square" style ="width:128px;height: 260px;"></div>
+          
+          <div id="ship-light1" value="0" class="light-dot" style="left: 40px;top: -24px;opacity: 0.5;">
+            <div  class="light-dot" style="transform: rotate(0deg);">
+              <div id="cone1" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone1-overlay" class="light-dot" style="left: 40px;top: -24px">
+            <span class= "theme-color-bright ">1</span>
+          </div>
+          <div id="ship-light2" value="0" class="light-dot" style="left: -28px;top: 108px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(290deg);">
+              <div id="cone2" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone2-overlay" class="light-dot" style="left: -28px;top: 108px;">
+            <span class= "theme-color-bright">2</span>
+          </div>
+          <div id="ship-light3" value="0" class="light-dot" style="left: 104px;top: 108px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(70deg);">
+              <div id="cone3" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone3-overlay" class="light-dot" style="left: 104px;top: 108px;">
+            <span class= "theme-color-bright">3</span>
+          </div>
+          <div id="ship-light4" value="0" class="light-dot" style="left: 40px;top: 150px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(0deg);">
+              <div id="cone4" class="cone"></div>
+            </div>
+          </div>
+          <div id="cone4-overlay" class="light-dot" style="left: 40px;top: 150px;">
+            <span class= "theme-color-bright">4</span>
+          </div>
+          <div id="ship-light5" value="0" class="light-dot" style="left: -28px;top: 290px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(200deg);">
+              <div id="cone5" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone5-overlay" class="light-dot" style="left: -28px;top: 290px;">
+            <span class= "theme-color-bright">5</span>
+          </div>
+          <div id="ship-light6" value="0" class="light-dot" style="left: 40px;top: 290px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(180deg);">
+              <div id="cone6" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone6-overlay" class="light-dot" style="left: 40px;top: 290px;">
+            <span class= "theme-color-bright">6</span>
+          </div>
+          <div id="ship-light7" value="0" class="light-dot" style="left: 104px;top: 290px;opacity: 0.5;">
+            <div class="light-dot" style="transform: rotate(140deg);">
+              <div id="cone7" class="cone" ></div>
+            </div>
+          </div>
+          <div id="cone7-overlay" class="light-dot" style="left: 104px;top: 290px;">
+            <span class= "theme-color-bright">7</span>
+          </div>  
+          
+        </div>
+          <div class="align">
+            <ob-watchface-large style="width:1024px;">
+          </div>
+      </div>
+      <div class="ship-light-position" >
+        <div class="light-inner-circle" ></div>
+        <ob-watchface-large style="width:1024px;" >
+      </div>
+    </div>
+    <div class="light-card" style="left:1530px;width:380px;">
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Lights On/Off</div>
+      <div class="theme-color text-border"></div>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle1" name="ship-light1" class="light-enable light-pointer light-pointer-active">1  Forward
+        <div class="light-box ">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone1');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle2" name="ship-light2" class="light-enable light-pointer" style="top:100px;">2  Port wing
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone2');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle3" name="ship-light3" class="light-enable light-pointer" style="top:150px;">3  Starboard wing
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone3');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle4" name="ship-light4" class="light-enable light-pointer" style="top:200px;">4  Wheelhouse aft
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone4');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle5" name="ship-light5" class="light-enable light-pointer" style="top:250px;">5  Port aft
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone5');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle6" name="ship-light6" class="light-enable light-pointer" style="top:300px;">6  Center aft
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone6');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+      <a onclick="activeCone(this.name);activeLights(this.id);" id="lights-toggle7" name="ship-light7" class="light-enable light-pointer" style="top:350px;">7  Starboard aft
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');coneDisplay('cone7');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+      </a>
+
+      
+        
+    </div>
+  
+    <div class="light-card" style="left:1120px;width: 400px;"> 
+      <div class="ob-title theme-color-bright" style="padding: 8px;">Settings</div>
+      <div class="theme-color text-border"></div>
+      <div class="light-enable" style="top:50px;">Lights
+        <div class="light-box">
+          <div class="light-btn" onclick="this.classList.toggle('active');">
+            <div class="light-circle"></div>
+          </div>
+        </div>
+        <div class="light-settings-rod"></div>
+        <div class="light-settings-lens"><div class="light-settings-cone"></div></div>
+        <div class="light-settings-angle">
+          <input oninput="changeAngle(this.value,'ship-light1')" id="angle-slider" type="range" min="-20" max="20" value="0" class="light-slider">
+          <div class="light-settings-arrow"></div>
+          <div class="light-settings-arrow" style="left:94%;transform: rotate(-45deg);"></div>
+        </div>
+        <div class="light-settings-brightness">
+          <div class="light-settings-bright-arrow"><span class="material-icons theme-color">brightness_3</span></div>
+          <div class="light-settings-bright-arrow" style=left:90%;><span class="material-icons theme-color">brightness_high</span></div>
+          <input oninput="changeBrightness(this.value,'cone1')" id="brightness-slider" type="range" min="1" max="100" value="50" class="light-slider">
+        </div>
+      </div>
+      <div class="tank-tekst theme-color" style="top:55%;left:2%">Angle:</div>
+      <div id="light-angle-value" class="tank-tekst instrument-color" style="top:55%;left:60%">8˚</div>
+      <div class="tank-tekst theme-color" style="top:60%;left:2%">Brightness:</div>
+      <div id="light-brightness-value" class="tank-tekst instrument-color" style="top:60%;left:60%">50%</div>
+    </div>
+
+  </div>
+
+  <div id="SettingsTab" class="tabs">
+    <div class="settings-search theme-color">
+      <div class="app-search-bar" style="width: 800px;">
+          <span class="search-icon material-icons">search</span>
+          <input type="text" placeholder="Search" style="width: 800px;">
+      </div>
+    </div>
+  <div class="ob-nav-menu settings-card theme-color">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">settings</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">General</div>
+          <div>General settings</div>
+      </div>
+  </div>
+  <div class="settings-card  theme-color ob-nav-menu" style="left:750px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">info</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Info</div>
+          <div>System Info</div>
+      </div>
+  </div>
+  <div class="settings-card  theme-color ob-nav-menu" style="left:1000px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">security</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Security</div>
+          <div>Security settings</div>
+      </div>
+  </div>
+  <div class="settings-card theme-color ob-nav-menu" style="left:1250px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">verified_user</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Users</div>
+          <div>Authenticated users</div>
+      </div>
+  </div>
+  <div class="settings-card theme-color ob-nav-menu" style="top:550px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">tune</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Tuning</div>
+          <div>Tuning settings</div>
+      </div>
+  </div>
+  <div class="settings-card theme-color ob-nav-menu" style="top:550px;left:750px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">power_settings_new</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Power</div>
+          <div>Power settings</div>
+      </div>
+  </div>
+  <div class="settings-card theme-color ob-nav-menu" style="top:550px;left:1000px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">analytics</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Analytics
+          </div>
+          <div>Analytics info</div>
+      </div>
+  </div>
+  <div class="settings-card theme-color ob-nav-menu" style="top:550px;left:1250px">
+      <div class="apps" style="left: 65px; top: 20px;">
+      <span class="apps-icon material-icons">language</span>
+      </div>
+      <div class="settings-text">
+          <div class="settings-title theme-color-bright">Language</div>
+          <div>Change language</div>
+      </div>
+  </div>
+</div>
+
+
+
+  <div id="SupportTab" class="tabs theme-color">
+    <div class="support-search">
+      <div class="app-search-bar" style="width: 1190px;">
+        <span class="search-icon material-icons">search</span>
+        <input type="text" placeholder="Search" style="width: 1190px;">
+      </div>
+    </div>
+
+    <div class="ob-nav-menu support-box" style="left: 350px; top: 300px;">
+      <div><span class="support-icon material-icons">support_agent</span></div>
+      <div class="support-title theme-color-bright">Contact</div>
+      <div class="support-text">Contact a professinal</div>
+    </div>
+
+    <div class="ob-nav-menu support-box" style="left: 780px; top: 300px;">
+      <div><span class="support-icon material-icons">menu_book</span></div>
+      <div class="support-title theme-color-bright">Manual</div>
+      <div class="support-text">Download our user manual</div>
+    </div>
+
+    <div class="ob-nav-menu support-box" style="left: 1210px; top: 300px;">
+      <div><span class="support-icon material-icons">people</span></div>
+      <div class="support-title theme-color-bright">About us</div>
+      <div class="support-text">General information</div>
+    </div>
+  </div>
+
+
+  <script src="plotly.min.js"></script>
+  <script src="main.js"></script>
+
+
+  <!-- <script>
+    document.getElementById("alarm-number").innerText=document.getElementById("alarmList").getElementsByTagName("li").length;
+  </script> -->
+  
+  <script src="values.js"></script>
+
+  <!-- <script src="/socket.io/socket.io.js"></script>  -->
+
+
+
+</body>
+
+
+</html> <!-- End of code -->
